@@ -14,10 +14,11 @@ import java.util.Collection;
 @AllArgsConstructor
 @Entity
 public class Authority extends GeneralEntity implements GrantedAuthority {
-    private String authority;
+    @Enumerated(EnumType.STRING)
+    private AuthorityEnum authority;
 
     @Override
     public String getAuthority() {
-        return authority;
+        return authority.name();
     }
 }

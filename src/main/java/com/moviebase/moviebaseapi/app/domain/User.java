@@ -19,6 +19,10 @@ public class User extends GeneralEntity implements UserDetails {
     private String username;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Authority> authorities;
+    private boolean accountExpired;
+    private boolean accountLocked;
+    private boolean credentialsExpired;
+    private boolean enabled;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -37,21 +41,21 @@ public class User extends GeneralEntity implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return true;
+        return !accountExpired;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return !accountLocked;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return true;
+        return !credentialsExpired;
     }
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return enabled;
     }
 }
