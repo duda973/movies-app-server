@@ -1,4 +1,4 @@
-package com.moviebase.moviebaseapi.swagger;
+package com.moviebase.moviebaseapi.app.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

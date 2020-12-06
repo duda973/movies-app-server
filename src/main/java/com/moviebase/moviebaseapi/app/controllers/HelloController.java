@@ -1,4 +1,4 @@
-package com.moviebase.moviebaseapi.swagger;
+package com.moviebase.moviebaseapi.app.controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
