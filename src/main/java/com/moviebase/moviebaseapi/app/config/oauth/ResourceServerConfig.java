@@ -10,6 +10,12 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
 @EnableResourceServer
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
+    private final CustomAuthenticationEntryPoint authenticationEntryPoint;
+
+    public ResourceServerConfig(CustomAuthenticationEntryPoint authenticationEntryPoint) {
+        this.authenticationEntryPoint = authenticationEntryPoint;
+    }
+
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) {
         resources.resourceId("api");
@@ -24,6 +30,10 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
             .authorizeRequests()
                 .antMatchers("/api/**").authenticated()
                 .antMatchers("/swagger-ui").permitAll()
-                .anyRequest().authenticated();
+                .anyRequest().authenticated()
+            .and()
+            .exceptionHandling()
+                .authenticationEntryPoint(authenticationEntryPoint)
+                .accessDeniedHandler(new CustomAccessDeniedHandler());
     }
 }
