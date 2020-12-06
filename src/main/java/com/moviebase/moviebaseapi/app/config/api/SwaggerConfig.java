@@ -1,4 +1,4 @@
-package com.moviebase.moviebaseapi.app.config;
+package com.moviebase.moviebaseapi.app.config.api;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
