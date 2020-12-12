@@ -22,8 +22,8 @@ public class DatabaseSeeder implements CommandLineRunner {
     public void run(String... args) throws Exception {
         User userAdmin = new User(
                 "$2a$12$7V.9/X/IiweR1AMxdcG9SufZ.QDM6pLHBrw3rI6TRNafiGFCBfE/e",
-                "admin",
-                Collections.singletonList(new Authority(AuthorityEnum.ADMIN)),
+                "user1",
+                Collections.singletonList(new Authority(AuthorityEnum.USER)),
                 false,
                 false,
                 false,
@@ -34,7 +34,7 @@ public class DatabaseSeeder implements CommandLineRunner {
 
         User basicUser = new User(
                 "$2a$12$7V.9/X/IiweR1AMxdcG9SufZ.QDM6pLHBrw3rI6TRNafiGFCBfE/e",
-                "user",
+                "user2",
                 Collections.singletonList(new Authority(AuthorityEnum.USER)),
                 false,
                 false,

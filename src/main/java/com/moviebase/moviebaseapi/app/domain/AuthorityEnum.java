@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public enum AuthorityEnum {
-    ADMIN("ADMIN"),
     USER("USER"),
     ;
 
