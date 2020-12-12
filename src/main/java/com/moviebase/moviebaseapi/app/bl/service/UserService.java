@@ -1,25 +1,9 @@
 package com.moviebase.moviebaseapi.app.bl.service;
 
-import com.moviebase.moviebaseapi.app.bl.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
+import com.moviebase.moviebaseapi.app.domain.UserProfile;
+import com.moviebase.moviebaseapi.app.util.exception.AppException;
 
-@Service
-@Qualifier("userService")
-public class UserService implements UserDetailsService {
+public interface UserService {
 
-    private final UserRepository userRepository;
-
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
-
-
-    @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        return userRepository.findByUsername(s);
-    }
+    UserProfile register(UserProfile user) throws AppException;
 }

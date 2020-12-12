@@ -12,12 +12,10 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class UserProfile extends GeneralEntity {
+public class UserProfile extends User {
     private String firstName;
     private String lastName;
-
-    @OneToOne
-    private User user;
+    private String email;
 
     @OneToMany(mappedBy = "user")
     private Set<UserMovie> movies = new HashSet<>();

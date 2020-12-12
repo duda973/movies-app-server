@@ -1,4 +1,4 @@
-package com.moviebase.moviebaseapi.app.controllers;
+package com.moviebase.moviebaseapi.app.web.controllers;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;

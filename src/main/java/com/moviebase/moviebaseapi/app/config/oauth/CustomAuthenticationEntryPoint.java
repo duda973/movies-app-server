@@ -1,7 +1,7 @@
 package com.moviebase.moviebaseapi.app.config.oauth;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.moviebase.moviebaseapi.app.config.api.ApiError;
+import com.moviebase.moviebaseapi.app.web.dto.ApiError;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;

@@ -1,12 +1,12 @@
-package com.moviebase.moviebaseapi.app.config.api;
+package com.moviebase.moviebaseapi.app.web.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.annotation.JsonTypeIdResolver;
 import com.fasterxml.jackson.databind.jsontype.impl.TypeIdResolverBase;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.*;
 import org.hibernate.validator.internal.engine.path.PathImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -20,15 +20,23 @@ import java.util.Set;
 
 
 @Data
+@Builder
+@AllArgsConstructor
 @JsonTypeInfo(include = JsonTypeInfo.As.WRAPPER_OBJECT, use = JsonTypeInfo.Id.CUSTOM, property = "error", visible = true)
 @JsonTypeIdResolver(LowerCaseClassNameResolver.class)
+@ApiModel(value = "ApiError", description = "Api error object")
 public class ApiError {
 
+    @ApiModelProperty(notes = "HttpStatus of error")
     private HttpStatus status;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
+    @ApiModelProperty(notes = "Error date time")
     private LocalDateTime timestamp;
+    @ApiModelProperty(notes = "Message")
     private String message;
+    @ApiModelProperty(notes = "Message for debug")
     private String debugMessage;
+    @ApiModelProperty(notes = "SubErrors")
     private List<ApiSubError> subErrors;
 
     private ApiError() {
@@ -116,10 +124,15 @@ public class ApiError {
     @Data
     @EqualsAndHashCode
     @AllArgsConstructor
+    @ApiModel(value = "ApiSubError", description = "Api sub error object")
     class ApiValidationError extends ApiSubError {
+        @ApiModelProperty(notes = "Object name")
         private String object;
+        @ApiModelProperty(notes = "Object field")
         private String field;
+        @ApiModelProperty(notes = "Rejected value")
         private Object rejectedValue;
+        @ApiModelProperty(notes = "Message")
         private String message;
 
         ApiValidationError(String object, String message) {

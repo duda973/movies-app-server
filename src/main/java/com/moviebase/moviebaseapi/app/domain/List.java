@@ -1,5 +1,6 @@
 package com.moviebase.moviebaseapi.app.domain;
 
+import com.moviebase.moviebaseapi.app.domain.abstraction.BasicGeneralEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,7 +12,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class List extends GeneralEntity {
+public class List extends BasicGeneralEntity {
     private String name;
 
     @ManyToMany

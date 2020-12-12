@@ -1,5 +1,6 @@
 package com.moviebase.moviebaseapi.app.domain;
 
+import com.moviebase.moviebaseapi.app.domain.abstraction.CompositeGeneralEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,9 +13,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class UserMovie {
-    @EmbeddedId
-    private UserMovieKey id;
+public class UserMovie extends CompositeGeneralEntity<UserMovieKey> {
 
     @ManyToOne
     @MapsId("userId")

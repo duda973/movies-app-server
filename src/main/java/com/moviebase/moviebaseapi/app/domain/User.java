@@ -1,5 +1,6 @@
 package com.moviebase.moviebaseapi.app.domain;
 
+import com.moviebase.moviebaseapi.app.domain.abstraction.BasicGeneralEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,17 +15,16 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class User extends GeneralEntity implements UserDetails {
-    private String password;
-    private String username;
+@Inheritance(strategy = InheritanceType.JOINED)
+public class User extends BasicGeneralEntity implements UserDetails {
+    protected String password;
+    protected String username;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Authority> authorities;
-    private boolean accountExpired;
-    private boolean accountLocked;
-    private boolean credentialsExpired;
-    private boolean enabled;
-    @OneToOne
-    private UserProfile userProfile;
+    protected List<Authority> authorities;
+    protected boolean accountExpired;
+    protected boolean accountLocked;
+    protected boolean credentialsExpired;
+    protected boolean enabled;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
