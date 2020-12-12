@@ -27,7 +27,8 @@ public class DatabaseSeeder implements CommandLineRunner {
                 false,
                 false,
                 false,
-                true
+                true,
+                null
         );
         userRepository.save(userAdmin);
 
@@ -38,7 +39,8 @@ public class DatabaseSeeder implements CommandLineRunner {
                 false,
                 false,
                 false,
-                true
+                true,
+                null
         );
         userRepository.save(basicUser);
     }

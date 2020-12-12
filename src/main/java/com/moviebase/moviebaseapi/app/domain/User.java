@@ -23,6 +23,8 @@ public class User extends GeneralEntity implements UserDetails {
     private boolean accountLocked;
     private boolean credentialsExpired;
     private boolean enabled;
+    @OneToOne
+    private UserProfile userProfile;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
