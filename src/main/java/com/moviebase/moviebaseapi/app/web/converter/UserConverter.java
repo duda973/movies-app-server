@@ -2,7 +2,6 @@ package com.moviebase.moviebaseapi.app.web.converter;
 
 import com.moviebase.moviebaseapi.app.domain.UserProfile;
 import com.moviebase.moviebaseapi.app.util.PrerequisiteUtil;
-import com.moviebase.moviebaseapi.app.util.exception.AppException;
 import com.moviebase.moviebaseapi.app.web.dto.ApiUser;
 import org.springframework.stereotype.Component;
 
@@ -10,7 +9,7 @@ import org.springframework.stereotype.Component;
 public class UserConverter implements IConverter<ApiUser, UserProfile> {
 
     @Override
-    public ApiUser toDTO(UserProfile domainObj) throws AppException {
+    public ApiUser toDTO(UserProfile domainObj) {
         PrerequisiteUtil.notNull(domainObj, "UserProfile you have passed is null");
         PrerequisiteUtil.notNull(domainObj, "UserProfile's User attribute you have passed is null");
 
@@ -23,7 +22,7 @@ public class UserConverter implements IConverter<ApiUser, UserProfile> {
     }
 
     @Override
-    public UserProfile toDomain(ApiUser dtoObj) throws AppException {
+    public UserProfile toDomain(ApiUser dtoObj) {
         PrerequisiteUtil.notNull(dtoObj, "User you have passed is null");
 
         UserProfile userProfile = new UserProfile();

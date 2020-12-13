@@ -1,7 +1,8 @@
-package com.moviebase.moviebaseapi.app.bl.service;
+package com.moviebase.moviebaseapi.app.bl.service.impl;
 
 import com.moviebase.moviebaseapi.app.bl.repository.UserProfileRepository;
 import com.moviebase.moviebaseapi.app.bl.repository.UserRepository;
+import com.moviebase.moviebaseapi.app.bl.service.UserService;
 import com.moviebase.moviebaseapi.app.domain.UserProfile;
 import com.moviebase.moviebaseapi.app.util.exception.AppException;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -32,7 +33,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     }
 
     @Override
-    public UserProfile register(UserProfile user) throws AppException {
+    public UserProfile register(UserProfile user) {
         if(userRepository.existsByUsername(user.getUsername()))
             throw new AppException("Username is taken by another user");
 

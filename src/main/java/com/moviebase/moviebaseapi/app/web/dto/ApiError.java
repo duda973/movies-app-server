@@ -27,6 +27,8 @@ import java.util.Set;
 @ApiModel(value = "ApiError", description = "Api error object")
 public class ApiError {
 
+    @ApiModelProperty(notes = "Error id")
+    private String errorId;
     @ApiModelProperty(notes = "HttpStatus of error")
     private HttpStatus status;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
@@ -48,15 +50,17 @@ public class ApiError {
         this.status = status;
     }
 
-    public ApiError(HttpStatus status, Throwable ex) {
+    public ApiError(String errorId, HttpStatus status, Throwable ex) {
         this();
+        this.errorId = errorId;
         this.status = status;
         this.message = "Unexpected error";
         this.debugMessage = ex.getLocalizedMessage();
     }
 
-    public ApiError(HttpStatus status, String message, Throwable ex) {
+    public ApiError(String errorId, HttpStatus status, String message, Throwable ex) {
         this();
+        this.errorId = errorId;
         this.status = status;
         this.message = message;
         this.debugMessage = ex.getLocalizedMessage();
@@ -85,7 +89,7 @@ public class ApiError {
                 fieldError.getDefaultMessage());
     }
 
-    void addValidationErrors(List<FieldError> fieldErrors) {
+    public void addValidationErrors(List<FieldError> fieldErrors) {
         fieldErrors.forEach(this::addValidationError);
     }
 

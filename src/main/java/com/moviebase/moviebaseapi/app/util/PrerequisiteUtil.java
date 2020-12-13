@@ -6,8 +6,8 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class PrerequisiteUtil {
 
-    public void notNull(Object obj, String msg) throws AppException {
+    public void notNull(Object obj, String msg) {
         if(obj == null)
-            throw new AppException(msg);
+            throw new IllegalArgumentException(msg);
     }
 }

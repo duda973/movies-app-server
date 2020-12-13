@@ -5,5 +5,5 @@ import com.moviebase.moviebaseapi.app.util.exception.AppException;
 
 public interface UserService {
 
-    UserProfile register(UserProfile user) throws AppException;
+    UserProfile register(UserProfile user) ;
 }
