@@ -1,6 +1,6 @@
 package com.moviebase.moviebaseapi.app.domain;
 
-import com.moviebase.moviebaseapi.app.domain.abstraction.BasicGeneralEntity;
+import com.moviebase.moviebaseapi.app.domain.abstraction.SimpleGeneralEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public class User extends BasicGeneralEntity implements UserDetails {
+public class User extends SimpleGeneralEntity implements UserDetails {
     protected String password;
     protected String username;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

@@ -1,6 +1,6 @@
 package com.moviebase.moviebaseapi.app.domain;
 
-import com.moviebase.moviebaseapi.app.domain.abstraction.BasicGeneralEntity;
+import com.moviebase.moviebaseapi.app.domain.abstraction.SimpleGeneralEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,7 +12,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Authority extends BasicGeneralEntity implements GrantedAuthority {
+public class Authority extends SimpleGeneralEntity implements GrantedAuthority {
     @Enumerated(EnumType.STRING)
     private AuthorityEnum authority;
 
