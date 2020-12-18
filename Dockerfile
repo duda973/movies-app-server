@@ -1,6 +1,7 @@
-FROM golang:buster as builder
-WORKDIR /app
-ADD . .
-RUN go build -o app
+FROM java:8
+
 EXPOSE 8080
-CMD ["./app"]
+
+ADD target/moviedb-api.jar moviedb-api.jar
+
+ENTRYPOINT ["java", "-jar", "moviedb-api.jar"]

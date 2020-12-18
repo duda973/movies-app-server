@@ -1,3 +1,0 @@
-deploy:
-  - okteto build -t okteto.dev/docker-k8s-demo:latest
-  - kubectl apply -f k8s
