@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: docker-k8s-demo
-          image: okteto.dev/hello-world:latest
+          image: okteto.dev/docker-k8s-demo:latest
           ports:
             - containerPort: 8080
