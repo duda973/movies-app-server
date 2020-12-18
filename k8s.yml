@@ -1,22 +1,8 @@
-apiVersion: v1
-data:
-  .dockerconfigjson: ewoJImF1dGhzIjogewoJCSJodHRwczovL2luZGV4LmRvY2tlci5pby92MS8iOiB7fQoJfSwKCSJIdHRwSGVhZGVycyI6IHsKCQkiVXNlci1BZ2VudCI6ICJEb2NrZXItQ2xpZW50LzE5LjAzLjEzIChkYXJ3aW4pIgoJfSwKCSJjcmVkc1N0b3JlIjogImRlc2t0b3AiLAoJImV4cGVyaW1lbnRhbCI6ICJkaXNhYmxlZCIsCgkic3RhY2tPcmNoZXN0cmF0b3IiOiAic3dhcm0iCn0=
-kind: Secret
-metadata:
-  creationTimestamp: "2020-12-18T19:28:45Z"
-  name: regcred
-  namespace: duda973
-  resourceVersion: "268867929"
-  selfLink: /api/v1/namespaces/duda973/secrets/regcred
-  uid: 2a1a2708-fa1c-4c61-9b8e-e0d5d7fda800
-type: kubernetes.io/dockerconfigjson
-
----
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: moviebase-api-deployment
+  namespace: duda973
 spec:
   replicas: 1
   selector:
@@ -32,10 +18,8 @@ spec:
         - name: api
           image: duda973/moviebase:latest
           imagePullPolicy: Always
-          imagePullSecrets:
-            - name: regcred
           ports:
-            - containerPort: 8080
+              - containerPort: 8080
 
 ---
 
@@ -43,6 +27,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: moviebase-api-service
+  namespace: duda973
   annotations:
     dev.okteto.com/auto-ingress: "true"
   labels:
