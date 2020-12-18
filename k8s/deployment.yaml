@@ -2,13 +2,11 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: docker-k8s-movie-app-api-deployment
-  labels:
-    app: docker-k8s-movie-app-demo
 spec:
-  replicas: 1
   selector:
     matchLabels:
       app: docker-k8s-demo
+  replicas: 1
   template:
     metadata:
       labels:
@@ -16,7 +14,6 @@ spec:
     spec:
       containers:
         - name: docker-k8s-demo
-          image: duda973/first-repo
+          image: okteto.dev/hello-world:latest
           ports:
             - containerPort: 8080
-
