@@ -32,10 +32,10 @@ spec:
         - name: api
           image: duda973/moviebase:latest
           imagePullPolicy: Always
+          imagePullSecrets:
+            - name: regcred
           ports:
             - containerPort: 8080
-      imagePullSecrets:
-        - name: regcred
 
 ---
 
