@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: moviebase-api-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: moviebase-api
+  template:
+    metadata:
+      labels:
+        app: moviebase-api
+    spec:
+      terminationGracePeriodSeconds: 0
+      containers:
+        - name: api
+          image: duda973/moviebase:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: moviebase-api-service
+  annotations:
+    dev.okteto.com/auto-ingress: "true"
+  labels:
+    app: moviebase-api
+spec:
+  type: ClusterIP
+  ports:
+    - name: moviebase-api
+      port: 8080
+  selector:
+    app: moviebase-api
