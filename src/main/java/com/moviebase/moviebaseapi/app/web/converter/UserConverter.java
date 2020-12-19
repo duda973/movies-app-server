@@ -6,7 +6,7 @@ import com.moviebase.moviebaseapi.app.web.dto.ApiUser;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserConverter implements IConverter<ApiUser, UserProfile> {
+public class UserConverter extends AbstractConverter<ApiUser, UserProfile> {
 
     @Override
     public ApiUser toDTO(UserProfile domainObj) {

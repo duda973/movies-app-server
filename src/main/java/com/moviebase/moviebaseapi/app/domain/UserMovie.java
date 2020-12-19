@@ -28,5 +28,5 @@ public class UserMovie extends CompositeGeneralEntity<UserMovieKey> {
     private LocalDateTime registrationTime;
 
     @ManyToMany(mappedBy = "userMovies")
-    private Set<List> lists;
+    private Set<MovieList> lists;
 }

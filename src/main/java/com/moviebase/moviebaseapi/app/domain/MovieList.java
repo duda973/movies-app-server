@@ -12,7 +12,8 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class List extends SimpleGeneralEntity {
+public class MovieList extends SimpleGeneralEntity {
+    @Column(unique = true)
     private String name;
 
     @ManyToMany
@@ -22,6 +23,6 @@ public class List extends SimpleGeneralEntity {
     private Set<UserMovie> userMovies;
 
     @ManyToOne
-    @JoinColumn(name = "user_profile_id")
+    @JoinColumn(name = "user_profile_id", nullable = false)
     private UserProfile user;
 }
