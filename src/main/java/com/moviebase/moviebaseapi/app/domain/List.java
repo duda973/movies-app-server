@@ -22,6 +22,6 @@ public class List extends SimpleGeneralEntity {
     private Set<UserMovie> userMovies;
 
     @ManyToOne
-    @JoinColumn(name = "user_profile_id")
+    @JoinColumn(name = "user_profile_id", nullable = false)
     private UserProfile user;
 }

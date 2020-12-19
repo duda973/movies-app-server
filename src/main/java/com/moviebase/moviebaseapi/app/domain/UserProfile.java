@@ -1,8 +1,6 @@
 package com.moviebase.moviebaseapi.app.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -22,4 +20,14 @@ public class UserProfile extends User {
 
     @OneToMany(mappedBy = "user")
     private Set<List> lists = new HashSet<>();
+
+    public UserProfile(User user) {
+        this.username = user.getUsername();
+        this.password = user.getPassword();
+        this.enabled = user.enabled;
+        this.accountExpired = user.accountExpired;
+        this.accountLocked = user.accountLocked;
+        this.credentialsExpired = user.credentialsExpired;
+        this.authorities = (java.util.List<Authority>) user.getAuthorities();
+    }
 }
