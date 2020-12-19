@@ -19,9 +19,11 @@ public class UserProfile extends User {
     private Set<UserMovie> movies = new HashSet<>();
 
     @OneToMany(mappedBy = "user")
-    private Set<List> lists = new HashSet<>();
+    private Set<MovieList> movieLists = new HashSet<>();
 
     public UserProfile(User user) {
+        this.id = user.getId();
+        this.createdAt = user.getCreatedAt();
         this.username = user.getUsername();
         this.password = user.getPassword();
         this.enabled = user.enabled;

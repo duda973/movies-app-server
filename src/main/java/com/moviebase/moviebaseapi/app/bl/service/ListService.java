@@ -1,10 +1,14 @@
 package com.moviebase.moviebaseapi.app.bl.service;
 
-import com.moviebase.moviebaseapi.app.domain.List;
+import com.moviebase.moviebaseapi.app.domain.MovieList;
+
+import java.util.List;
 
 public interface ListService {
 
-    List create(List list, String username);
+    MovieList create(MovieList movieList, String username);
 
-    List get(Integer id);
+    MovieList get(Integer id);
+
+    List<MovieList> findAll(String username);
 }

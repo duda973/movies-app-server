@@ -12,7 +12,8 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class List extends SimpleGeneralEntity {
+public class MovieList extends SimpleGeneralEntity {
+    @Column(unique = true)
     private String name;
 
     @ManyToMany

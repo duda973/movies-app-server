@@ -1,7 +1,7 @@
 package com.moviebase.moviebaseapi.app.web.controllers.impl;
 
 import com.moviebase.moviebaseapi.app.bl.service.ListService;
-import com.moviebase.moviebaseapi.app.domain.List;
+import com.moviebase.moviebaseapi.app.domain.MovieList;
 import com.moviebase.moviebaseapi.app.web.controllers.AbstractController;
 import com.moviebase.moviebaseapi.app.web.controllers.ListController;
 import com.moviebase.moviebaseapi.app.web.converter.ListConverter;
@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -27,13 +28,23 @@ public class ListControllerImpl extends AbstractController implements ListContro
     }
 
     @Override
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<?> create(@Valid @RequestBody ApiList apiList) {
-        List listToCreate = converter.toDomain(apiList);
-        List createdList = listService.create(listToCreate, getPrincipal().getUsername());
+        MovieList movieListToCreate = converter.toDomain(apiList);
+        MovieList createdMovieList = listService.create(movieListToCreate, getPrincipal().getUsername());
 
         return ResponseEntity
                 .ok()
-                .body(converter.toDTO(createdList));
+                .body(converter.toDTO(createdMovieList));
+    }
+
+    @Override
+    @GetMapping("/all")
+    public ResponseEntity<List<ApiList>> findAll() {
+        List<MovieList> list = listService.findAll(getPrincipal().getUsername());
+
+        return ResponseEntity
+                .ok()
+                .body(converter.toDTO(list));
     }
 }

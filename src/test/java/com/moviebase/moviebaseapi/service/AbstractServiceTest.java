@@ -1,12 +1,8 @@
 package com.moviebase.moviebaseapi.service;
 
 import com.moviebase.moviebaseapi.app.bl.service.UserService;
-import com.moviebase.moviebaseapi.app.domain.List;
 import com.moviebase.moviebaseapi.app.domain.UserProfile;
-import org.aspectj.lang.annotation.Before;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
