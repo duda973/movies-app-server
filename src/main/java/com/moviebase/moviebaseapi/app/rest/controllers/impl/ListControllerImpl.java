@@ -7,6 +7,7 @@ import com.moviebase.moviebaseapi.app.rest.converter.ListConverter;
 import com.moviebase.moviebaseapi.app.rest.model.ApiList;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -25,6 +26,7 @@ public class ListControllerImpl extends AbstractController implements ListContro
     }
 
     @Override
+    @PreAuthorize("isAuthenticated()")
     @PostMapping
     public ResponseEntity<?> create(@Valid @RequestBody String listName) {
         commandDispatcher.dispatch(new CreateListCommand(listName), null, getUserProfile());
@@ -34,6 +36,7 @@ public class ListControllerImpl extends AbstractController implements ListContro
     }
 
     @Override
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/add-movie")
     public ResponseEntity<?> addMovie(@Valid @RequestBody AddMovieCommand command) {
         AddMovieCommandResult result = commandDispatcher.dispatch(command, null, getUserProfile());
@@ -43,6 +46,7 @@ public class ListControllerImpl extends AbstractController implements ListContro
     }
 
     @Override
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/all")
     public ResponseEntity<List<ApiList>> findAll() {
         FindListsCommandResult result = commandDispatcher.dispatch(new FindListsCommand(getUserProfile()), null, getUserProfile());
