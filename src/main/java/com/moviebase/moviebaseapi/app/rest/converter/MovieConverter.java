@@ -13,8 +13,9 @@ public class MovieConverter extends AbstractConverter<ApiMovie, Movie> {
         PrerequisiteUtil.notNull(domainObj, "Movie you have passed is null");
 
         return ApiMovie.builder()
-                .name(domainObj.getName())
-                .apiKey(domainObj.getApiId())
+                .title(domainObj.getTitle())
+                .overview(domainObj.getOverview())
+                .apiId(domainObj.getApiId())
                 .build();
     }
 }

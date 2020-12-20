@@ -16,9 +16,11 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class ApiMovie implements IApiObject {
 
-    @ApiModelProperty(notes = "Movie name")
-    private String name;
-    @ApiModelProperty(notes = "Movie API key")
-    private String apiKey;
+    @ApiModelProperty(notes = "Movie title")
+    private String title;
+    @ApiModelProperty(notes = "Movie overview")
+    private String overview;
+    @ApiModelProperty(notes = "Movie API id")
+    private Long apiId;
 
 }

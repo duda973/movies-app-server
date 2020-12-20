@@ -16,9 +16,11 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 public class Movie extends SimpleGeneralEntity {
-    private String apiId;
-    private String name;
-    private String description;
+    private Long apiId;
+    private String imdbId;
+    private String title;
+    @Lob
+    private String overview;
 
     @OneToMany(mappedBy = "id.movie")
     private Set<UserMovie> users = new HashSet<>();
