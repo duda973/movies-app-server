@@ -6,6 +6,6 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class LoadUserCommand extends Command<LoadUserCommandResult> {
+public class LoadUserCommand extends Command {
     private final String username;
 }

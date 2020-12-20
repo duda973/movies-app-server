@@ -1,4 +1,4 @@
 package com.moviebase.moviebaseapi.app.bl.command.base;
 
-public abstract class Command<R extends CommandResult> {
+public abstract class Command {
 }
