@@ -1,9 +1,11 @@
 package com.moviebase.moviebaseapi.app.bl.command.impl.movielist;
 
 import com.moviebase.moviebaseapi.app.bl.command.base.CommandExecutor;
+import com.moviebase.moviebaseapi.app.bl.movieapi.model.ImdbMovie;
 import com.moviebase.moviebaseapi.app.bl.repository.ListRepository;
 import com.moviebase.moviebaseapi.app.bl.repository.MovieRepository;
 import com.moviebase.moviebaseapi.app.bl.repository.UserMovieRepository;
+import com.moviebase.moviebaseapi.app.bl.movieapi.MovieApiService;
 import com.moviebase.moviebaseapi.app.domain.*;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.core.env.PropertyResolver;
@@ -13,11 +15,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class AddMovieCommandExecutor extends CommandExecutor<AddMovieCommand, AddMovieCommandResult> {
 
+    private final MovieApiService movieApiService;
     private final MovieRepository movieRepository;
     private final UserMovieRepository userMovieRepository;
     private final ListRepository listRepository;
 
-    public AddMovieCommandExecutor(MovieRepository movieRepository, UserMovieRepository userMovieRepository, ListRepository listRepository) {
+    public AddMovieCommandExecutor(MovieApiService movieApiService,
+                                   MovieRepository movieRepository,
+                                   UserMovieRepository userMovieRepository,
+                                   ListRepository listRepository) {
+        this.movieApiService = movieApiService;
         this.movieRepository = movieRepository;
         this.userMovieRepository = userMovieRepository;
         this.listRepository = listRepository;
@@ -61,8 +68,17 @@ public class AddMovieCommandExecutor extends CommandExecutor<AddMovieCommand, Ad
         if(movieRepository.existsByApiId(movieApiKey))
             return movieRepository.findByApiId(movieApiKey);
 
-        // TODO fetch movie from api instead mocking
-        Movie movie = new Movie(movieApiKey, "New Movie", "New Movie Description", null);
+        ImdbMovie imdbMovie = movieApiService.getByApiKey(movieApiKey);
+        Movie movie = convert(imdbMovie);
         return movieRepository.save(movie);
+    }
+
+    private Movie convert(ImdbMovie imdbMovie) {
+        Movie movie = new Movie();
+        movie.setApiId(imdbMovie.getId());
+        movie.setImdbId(imdbMovie.getImdbId());
+        movie.setTitle(imdbMovie.getTitle());
+        movie.setOverview(imdbMovie.getOverview());
+        return movie;
     }
 }

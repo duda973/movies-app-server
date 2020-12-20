@@ -12,18 +12,19 @@ import java.util.Map;
 
 @Service
 public class SpringCommandDispatcher extends CommandDispatcher {
-    private final Map<String, ICommandExecutor> rawMap;
+    private final Map<String, CommandExecutor> rawMap;
 
-    public SpringCommandDispatcher(Map<String, ICommandExecutor> rawMap) {
+    public SpringCommandDispatcher(Map<String, CommandExecutor> rawMap) {
         this.rawMap = rawMap;
     }
 
     @PostConstruct
     private void setUp() {
         if (rawMap != null && !rawMap.isEmpty()) {
-            for (ICommandExecutor commandExecutor : rawMap.values()) {
-                Type command = ((ParameterizedType)commandExecutor.getClass().getGenericInterfaces()[0]).getActualTypeArguments()[0];
-                preparedMap.put((Class) command, commandExecutor);
+            for (CommandExecutor commandExecutor : rawMap.values()) {
+                ParameterizedType type = (ParameterizedType) commandExecutor.getClass().getGenericSuperclass();
+                Type superClass = type.getActualTypeArguments()[0];
+                preparedMap.put((Class) superClass, commandExecutor);
             }
         }
     }

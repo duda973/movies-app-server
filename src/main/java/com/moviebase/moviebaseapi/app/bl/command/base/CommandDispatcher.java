@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class CommandDispatcher {
-    protected Map<Class, ICommandExecutor> preparedMap = new HashMap<>();
+    protected Map<Class, CommandExecutor> preparedMap = new HashMap<>();
 
     public <C extends Command, R extends CommandResult> R dispatch(C command, PropertyResolver properties, UserProfile user){
         return (R) preparedMap.get(command.getClass()).execute(command, properties, user);
