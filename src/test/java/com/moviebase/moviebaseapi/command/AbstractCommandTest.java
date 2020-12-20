@@ -20,7 +20,7 @@ public abstract class AbstractCommandTest {
 	@BeforeEach
 	public void initUser(){
 		RegisterUserCommand command = new RegisterUserCommand("test", "user", "test-user", "test-user-pwd", "test@user.com");
-		RegisterUserCommandResult result = executor.execute(command);
+		RegisterUserCommandResult result = executor.doExecute(command, null, null);
 		userProfile = result.getUser();
 	}
 

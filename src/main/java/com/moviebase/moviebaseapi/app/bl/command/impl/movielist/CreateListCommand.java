@@ -8,5 +8,4 @@ import lombok.Getter;
 @AllArgsConstructor
 public class CreateListCommand extends Command {
     private final String name;
-    private final String username;
 }

@@ -24,9 +24,9 @@ public class CreateListCommandTest extends AbstractCommandTest {
 
 	@Test
 	public void test(){
-		CreateListCommand command = new CreateListCommand("Nova lista", userProfile.getUsername());
+		CreateListCommand command = new CreateListCommand("Nova lista");
 
-		commandExecutor.execute(command);
+		commandExecutor.doExecute(command, null, userProfile);
 
 		List<MovieList> lists = listRepository.findAllByUser(userProfile);
 

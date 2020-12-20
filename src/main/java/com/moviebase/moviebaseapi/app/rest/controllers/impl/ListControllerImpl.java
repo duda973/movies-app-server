@@ -27,7 +27,7 @@ public class ListControllerImpl extends AbstractController implements ListContro
     @Override
     @PostMapping
     public ResponseEntity<?> create(@Valid @RequestBody String listName) {
-        commandDispatcher.dispatch(new CreateListCommand(listName, getPrincipal().getUsername()));
+        commandDispatcher.dispatch(new CreateListCommand(listName), null, getUserProfile());
         return ResponseEntity
                 .ok()
                 .build();
@@ -36,8 +36,7 @@ public class ListControllerImpl extends AbstractController implements ListContro
     @Override
     @PostMapping("/add-movie")
     public ResponseEntity<?> addMovie(@Valid @RequestBody AddMovieCommand command) {
-        command.setUsername(getPrincipal().getUsername());
-        AddMovieCommandResult result = commandDispatcher.dispatch(command);
+        AddMovieCommandResult result = commandDispatcher.dispatch(command, null, getUserProfile());
         return ResponseEntity
                 .ok()
                 .body(converter.toDTO(result.getList()));
@@ -46,7 +45,7 @@ public class ListControllerImpl extends AbstractController implements ListContro
     @Override
     @GetMapping("/all")
     public ResponseEntity<List<ApiList>> findAll() {
-        FindListsCommandResult result = commandDispatcher.dispatch(new FindListsCommand(getPrincipal().getUsername()));
+        FindListsCommandResult result = commandDispatcher.dispatch(new FindListsCommand(getUserProfile()), null, getUserProfile());
 
         return ResponseEntity
                 .ok()

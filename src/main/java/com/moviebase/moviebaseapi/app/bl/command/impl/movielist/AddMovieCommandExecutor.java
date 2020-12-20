@@ -4,33 +4,34 @@ import com.moviebase.moviebaseapi.app.bl.command.base.CommandExecutor;
 import com.moviebase.moviebaseapi.app.bl.repository.ListRepository;
 import com.moviebase.moviebaseapi.app.bl.repository.MovieRepository;
 import com.moviebase.moviebaseapi.app.bl.repository.UserMovieRepository;
-import com.moviebase.moviebaseapi.app.bl.repository.UserProfileRepository;
 import com.moviebase.moviebaseapi.app.domain.*;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.core.env.PropertyResolver;
 import org.springframework.stereotype.Service;
 
 @Log4j2
 @Service
-public class AddMovieCommandExecutor implements CommandExecutor<AddMovieCommand, AddMovieCommandResult> {
+public class AddMovieCommandExecutor extends CommandExecutor<AddMovieCommand, AddMovieCommandResult> {
 
-    private final UserProfileRepository userProfileRepository;
     private final MovieRepository movieRepository;
     private final UserMovieRepository userMovieRepository;
     private final ListRepository listRepository;
 
-    public AddMovieCommandExecutor(UserProfileRepository userProfileRepository, MovieRepository movieRepository, UserMovieRepository userMovieRepository, ListRepository listRepository) {
-        this.userProfileRepository = userProfileRepository;
+    public AddMovieCommandExecutor(MovieRepository movieRepository, UserMovieRepository userMovieRepository, ListRepository listRepository) {
         this.movieRepository = movieRepository;
         this.userMovieRepository = userMovieRepository;
         this.listRepository = listRepository;
     }
 
     @Override
-    public AddMovieCommandResult execute(AddMovieCommand command) {
-        UserProfile user = userProfileRepository.findByUsername(command.getUsername());
-
+    public void preSubmitHook(AddMovieCommand command, PropertyResolver properties, UserProfile user) {
         if(!listRepository.existsByNameAndUser(command.getListName(), user))
             throw new IllegalArgumentException("List does not exists");
+    }
+
+    @Override
+    public AddMovieCommandResult doExecute(AddMovieCommand command, PropertyResolver properties, UserProfile user) {
+        preSubmitHook(command, properties, user);
 
         MovieList list = listRepository.findByNameAndUser(command.getListName(), user);
 

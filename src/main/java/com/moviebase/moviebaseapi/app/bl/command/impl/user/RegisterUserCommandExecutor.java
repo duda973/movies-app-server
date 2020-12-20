@@ -5,11 +5,12 @@ import com.moviebase.moviebaseapi.app.bl.repository.UserProfileRepository;
 import com.moviebase.moviebaseapi.app.bl.repository.UserRepository;
 import com.moviebase.moviebaseapi.app.domain.UserProfile;
 import com.moviebase.moviebaseapi.app.util.exception.AppException;
+import org.springframework.core.env.PropertyResolver;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RegisterUserCommandExecutor implements CommandExecutor<RegisterUserCommand, RegisterUserCommandResult> {
+public class RegisterUserCommandExecutor extends CommandExecutor<RegisterUserCommand, RegisterUserCommandResult> {
 
     private final UserRepository userRepository;
     private final UserProfileRepository userProfileRepository;
@@ -23,9 +24,13 @@ public class RegisterUserCommandExecutor implements CommandExecutor<RegisterUser
     }
 
     @Override
-    public RegisterUserCommandResult execute(RegisterUserCommand command) {
+    public void preSubmitHook(RegisterUserCommand command, PropertyResolver properties, UserProfile user) {
         if(userRepository.existsByUsername(command.getUsername()))
             throw new AppException("Username is taken by another user");
+    }
+
+    @Override
+    public RegisterUserCommandResult doExecute(RegisterUserCommand command, PropertyResolver properties, UserProfile user) {
 
         UserProfile userProfile = convert(command);
         userProfile = userProfileRepository.save(userProfile);

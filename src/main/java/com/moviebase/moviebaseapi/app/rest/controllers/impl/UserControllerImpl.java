@@ -26,7 +26,7 @@ public class UserControllerImpl extends AbstractController implements UserContro
     @Override
     @PostMapping("/register")
     public ResponseEntity<?> register(@Valid @RequestBody RegisterUserCommand command) {
-        RegisterUserCommandResult result = commandDispatcher.dispatch(command);
+        RegisterUserCommandResult result = commandDispatcher.dispatch(command, null, null);
 
         return ResponseEntity
                 .ok()

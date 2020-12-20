@@ -9,5 +9,5 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class LoadUserCommandResult extends CommandResult {
-    private final User user;
+    private final UserProfile user;
 }

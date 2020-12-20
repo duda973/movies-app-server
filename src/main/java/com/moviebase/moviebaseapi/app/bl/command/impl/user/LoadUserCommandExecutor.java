@@ -2,33 +2,31 @@ package com.moviebase.moviebaseapi.app.bl.command.impl.user;
 
 import com.moviebase.moviebaseapi.app.bl.command.base.CommandExecutor;
 import com.moviebase.moviebaseapi.app.bl.repository.UserProfileRepository;
-import com.moviebase.moviebaseapi.app.bl.repository.UserRepository;
 import com.moviebase.moviebaseapi.app.domain.User;
 import com.moviebase.moviebaseapi.app.domain.UserProfile;
-import com.moviebase.moviebaseapi.app.util.exception.AppException;
+import org.springframework.core.env.PropertyResolver;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class LoadUserCommandExecutor implements CommandExecutor<LoadUserCommand, LoadUserCommandResult>, UserDetailsService {
+public class LoadUserCommandExecutor extends CommandExecutor<LoadUserCommand, LoadUserCommandResult> implements UserDetailsService {
 
-    private final UserRepository userRepository;
+    private final UserProfileRepository userProfileRepository;
 
-    public LoadUserCommandExecutor(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public LoadUserCommandExecutor(UserProfileRepository userProfileRepository) {
+        this.userProfileRepository = userProfileRepository;
     }
 
     @Override
-    public LoadUserCommandResult execute(LoadUserCommand command) {
-        User user = userRepository.findByUsername(command.getUsername());
-        return new LoadUserCommandResult(user);
+    public LoadUserCommandResult doExecute(LoadUserCommand command, PropertyResolver properties, UserProfile user) {
+        UserProfile result = userProfileRepository.findByUsername(command.getUsername());
+        return new LoadUserCommandResult(result);
     }
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        return execute(new LoadUserCommand(s)).getUser();
+        return execute(new LoadUserCommand(s), null, null).getUser();
     }
 }
