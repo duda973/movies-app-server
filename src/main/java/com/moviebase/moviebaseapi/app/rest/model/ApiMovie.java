@@ -8,20 +8,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
-import java.util.Set;
 
-@ApiModel(value = "List", description = "List model")
+@ApiModel(value = "Movie", description = "Movie model")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ApiList implements IApiObject {
+public class ApiMovie implements IApiObject {
 
-    @ApiModelProperty(notes = "Lists name")
-    @NotNull(message = "Lists name must exist")
+    @ApiModelProperty(notes = "Movie name")
     private String name;
-
-    @ApiModelProperty(notes = "Movies in list")
-    private Set<ApiMovie> movies;
+    @ApiModelProperty(notes = "Movie API key")
+    private String apiKey;
 
 }

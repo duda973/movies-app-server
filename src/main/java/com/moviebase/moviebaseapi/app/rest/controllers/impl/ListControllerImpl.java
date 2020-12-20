@@ -1,8 +1,6 @@
 package com.moviebase.moviebaseapi.app.rest.controllers.impl;
 
-import com.moviebase.moviebaseapi.app.bl.command.impl.movielist.CreateListCommand;
-import com.moviebase.moviebaseapi.app.bl.command.impl.movielist.FindListsCommand;
-import com.moviebase.moviebaseapi.app.bl.command.impl.movielist.FindListsCommandResult;
+import com.moviebase.moviebaseapi.app.bl.command.impl.movielist.*;
 import com.moviebase.moviebaseapi.app.rest.controllers.AbstractController;
 import com.moviebase.moviebaseapi.app.rest.controllers.ListController;
 import com.moviebase.moviebaseapi.app.rest.converter.ListConverter;
@@ -33,6 +31,16 @@ public class ListControllerImpl extends AbstractController implements ListContro
         return ResponseEntity
                 .ok()
                 .build();
+    }
+
+    @Override
+    @PostMapping("/add-movie")
+    public ResponseEntity<?> addMovie(@Valid @RequestBody AddMovieCommand command) {
+        command.setUsername(getPrincipal().getUsername());
+        AddMovieCommandResult result = commandDispatcher.dispatch(command);
+        return ResponseEntity
+                .ok()
+                .body(converter.toDTO(result.getList()));
     }
 
     @Override

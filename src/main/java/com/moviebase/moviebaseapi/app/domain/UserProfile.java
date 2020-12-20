@@ -9,13 +9,15 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(exclude = {"movies", "movieLists"})
+@EqualsAndHashCode(exclude = {"movies", "movieLists"}, callSuper = true)
 @Entity
 public class UserProfile extends User {
     private String firstName;
     private String lastName;
     private String email;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "id.user")
     private Set<UserMovie> movies = new HashSet<>();
 
     @OneToMany(mappedBy = "user")
