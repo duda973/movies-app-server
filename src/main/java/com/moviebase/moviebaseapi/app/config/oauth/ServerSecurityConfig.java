@@ -18,7 +18,7 @@ public class ServerSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
 
-    public ServerSecurityConfig(@Qualifier("userServiceImpl") UserDetailsService userDetailsService){
+    public ServerSecurityConfig(@Qualifier("loadUserCommandExecutor") UserDetailsService userDetailsService){
         this.userDetailsService = userDetailsService;
     }
 

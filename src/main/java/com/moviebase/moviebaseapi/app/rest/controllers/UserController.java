@@ -1,5 +1,6 @@
 package com.moviebase.moviebaseapi.app.rest.controllers;
 
+import com.moviebase.moviebaseapi.app.bl.command.impl.user.RegisterUserCommand;
 import com.moviebase.moviebaseapi.app.rest.model.ApiError;
 import com.moviebase.moviebaseapi.app.rest.model.ApiUser;
 import io.swagger.annotations.*;
@@ -13,6 +14,6 @@ public interface UserController {
             @ApiResponse(code = 400, message = "Bad request", response = ApiError.class),
             @ApiResponse(code = 500, message = "Internal server error", response = ApiError.class)
     })
-    ResponseEntity<?> register(@ApiParam(value = "User object") ApiUser user);
+    ResponseEntity<?> register(@ApiParam(value = "User data") RegisterUserCommand user);
 
 }

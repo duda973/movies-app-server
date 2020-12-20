@@ -1,9 +1,10 @@
 package com.moviebase.moviebaseapi.app.rest.controllers.impl;
 
-import com.moviebase.moviebaseapi.app.bl.service.UserService;
+import com.moviebase.moviebaseapi.app.bl.command.impl.user.RegisterUserCommand;
+import com.moviebase.moviebaseapi.app.bl.command.impl.user.RegisterUserCommandResult;
+import com.moviebase.moviebaseapi.app.rest.controllers.AbstractController;
 import com.moviebase.moviebaseapi.app.rest.controllers.UserController;
 import com.moviebase.moviebaseapi.app.rest.converter.UserConverter;
-import com.moviebase.moviebaseapi.app.rest.model.ApiUser;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,24 +15,21 @@ import javax.validation.Valid;
 @RestController
 @Log4j2
 @RequestMapping("/api/user")
-public class UserControllerImpl implements UserController {
+public class UserControllerImpl extends AbstractController implements UserController {
 
-    private final UserService userService;
     private final UserConverter converter;
 
-    public UserControllerImpl(UserService userService, UserConverter converter) {
-        this.userService = userService;
+    public UserControllerImpl(UserConverter converter) {
         this.converter = converter;
     }
 
     @Override
     @PostMapping("/register")
-    public ResponseEntity<?> register(@Valid @RequestBody ApiUser apiUser) {
-//        UserProfile userToRegister = converter.toDomain(apiUser);
-//        UserProfile registeredUser = userService.register(userToRegister);
-//        return ResponseEntity
-//                .ok()
-//                .body(converter.toDTO(registeredUser));
-        return null;
+    public ResponseEntity<?> register(@Valid @RequestBody RegisterUserCommand command) {
+        RegisterUserCommandResult result = commandDispatcher.dispatch(command);
+
+        return ResponseEntity
+                .ok()
+                .body(converter.toDTO(result.getUser()));
     }
 }

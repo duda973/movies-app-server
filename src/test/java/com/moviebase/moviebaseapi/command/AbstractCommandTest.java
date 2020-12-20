@@ -1,6 +1,8 @@
 package com.moviebase.moviebaseapi.command;
 
-import com.moviebase.moviebaseapi.app.bl.service.UserService;
+import com.moviebase.moviebaseapi.app.bl.command.impl.user.RegisterUserCommand;
+import com.moviebase.moviebaseapi.app.bl.command.impl.user.RegisterUserCommandExecutor;
+import com.moviebase.moviebaseapi.app.bl.command.impl.user.RegisterUserCommandResult;
 import com.moviebase.moviebaseapi.app.domain.UserProfile;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,19 +14,14 @@ import org.springframework.transaction.annotation.Transactional;
 public abstract class AbstractCommandTest {
 
 	protected UserProfile userProfile;
-
 	@Autowired
-	private UserService userService;
+	private RegisterUserCommandExecutor executor;
 
 	@BeforeEach
 	public void initUser(){
-		userProfile = new UserProfile();
-		userProfile.setFirstName("Test");
-		userProfile.setLastName("User");
-		userProfile.setUsername("test-user");
-		userProfile.setPassword("test-user-password");
-		userProfile.setEmail("test@user.com");
-		userProfile = userService.register(userProfile);
+		RegisterUserCommand command = new RegisterUserCommand("test", "user", "test-user", "test-user-pwd", "test@user.com");
+		RegisterUserCommandResult result = executor.execute(command);
+		userProfile = result.getUser();
 	}
 
 }
