@@ -12,8 +12,8 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(uniqueConstraints = @UniqueConstraint(name = "movie_list_name_unique", columnNames = {"id", "user_profile_id", "name"}))
 public class MovieList extends SimpleGeneralEntity {
-    @Column(unique = true)
     private String name;
 
     @ManyToMany
