@@ -1,4 +1,4 @@
-package com.moviebase.moviebaseapi.app.web.dto;
+package com.moviebase.moviebaseapi.app.rest.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;

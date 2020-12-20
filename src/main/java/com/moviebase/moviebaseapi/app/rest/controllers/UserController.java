@@ -1,7 +1,7 @@
-package com.moviebase.moviebaseapi.app.web.controllers;
+package com.moviebase.moviebaseapi.app.rest.controllers;
 
-import com.moviebase.moviebaseapi.app.web.dto.ApiError;
-import com.moviebase.moviebaseapi.app.web.dto.ApiUser;
+import com.moviebase.moviebaseapi.app.rest.model.ApiError;
+import com.moviebase.moviebaseapi.app.rest.model.ApiUser;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 

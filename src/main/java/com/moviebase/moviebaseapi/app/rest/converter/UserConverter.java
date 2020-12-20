@@ -1,8 +1,8 @@
-package com.moviebase.moviebaseapi.app.web.converter;
+package com.moviebase.moviebaseapi.app.rest.converter;
 
 import com.moviebase.moviebaseapi.app.domain.UserProfile;
 import com.moviebase.moviebaseapi.app.util.PrerequisiteUtil;
-import com.moviebase.moviebaseapi.app.web.dto.ApiUser;
+import com.moviebase.moviebaseapi.app.rest.model.ApiUser;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -19,19 +19,5 @@ public class UserConverter extends AbstractConverter<ApiUser, UserProfile> {
                 .username(domainObj.getUsername())
                 .password(null)
                 .build();
-    }
-
-    @Override
-    public UserProfile toDomain(ApiUser dtoObj) {
-        PrerequisiteUtil.notNull(dtoObj, "User you have passed is null");
-
-        UserProfile userProfile = new UserProfile();
-        userProfile.setFirstName(dtoObj.getFirstName());
-        userProfile.setLastName(dtoObj.getLastName());
-        userProfile.setUsername(dtoObj.getUsername());
-        userProfile.setPassword(dtoObj.getPassword());
-        userProfile.setEmail(dtoObj.getEmail());
-
-        return userProfile;
     }
 }

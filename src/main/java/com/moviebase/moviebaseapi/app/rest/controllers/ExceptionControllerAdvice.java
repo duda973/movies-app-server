@@ -1,7 +1,7 @@
-package com.moviebase.moviebaseapi.app.web.controllers;
+package com.moviebase.moviebaseapi.app.rest.controllers;
 
 import com.moviebase.moviebaseapi.app.util.exception.AppException;
-import com.moviebase.moviebaseapi.app.web.dto.ApiError;
+import com.moviebase.moviebaseapi.app.rest.model.ApiError;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

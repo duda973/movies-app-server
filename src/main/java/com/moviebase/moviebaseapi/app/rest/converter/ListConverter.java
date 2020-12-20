@@ -1,8 +1,8 @@
-package com.moviebase.moviebaseapi.app.web.converter;
+package com.moviebase.moviebaseapi.app.rest.converter;
 
 import com.moviebase.moviebaseapi.app.domain.MovieList;
 import com.moviebase.moviebaseapi.app.util.PrerequisiteUtil;
-import com.moviebase.moviebaseapi.app.web.dto.ApiList;
+import com.moviebase.moviebaseapi.app.rest.model.ApiList;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -15,15 +15,5 @@ public class ListConverter extends AbstractConverter<ApiList, MovieList> {
         return ApiList.builder()
                 .name(domainObj.getName())
                 .build();
-    }
-
-    @Override
-    public MovieList toDomain(ApiList dtoObj) {
-        PrerequisiteUtil.notNull(dtoObj, "List you have passed is null");
-
-        MovieList obj = new MovieList();
-        obj.setName(dtoObj.getName());
-
-        return obj;
     }
 }

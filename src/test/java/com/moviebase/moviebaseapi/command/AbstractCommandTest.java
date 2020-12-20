@@ -1,4 +1,4 @@
-package com.moviebase.moviebaseapi.service;
+package com.moviebase.moviebaseapi.command;
 
 import com.moviebase.moviebaseapi.app.bl.service.UserService;
 import com.moviebase.moviebaseapi.app.domain.UserProfile;
@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @Transactional
-public abstract class AbstractServiceTest {
+public abstract class AbstractCommandTest {
 
 	protected UserProfile userProfile;
 

@@ -1,4 +1,4 @@
-package com.moviebase.moviebaseapi.app.web.dto;
+package com.moviebase.moviebaseapi.app.rest.model;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
