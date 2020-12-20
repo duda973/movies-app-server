@@ -6,7 +6,6 @@ import com.moviebase.moviebaseapi.app.bl.repository.ListRepository;
 import com.moviebase.moviebaseapi.app.bl.repository.UserProfileRepository;
 import com.moviebase.moviebaseapi.app.domain.MovieList;
 import com.moviebase.moviebaseapi.app.domain.UserProfile;
-import com.moviebase.moviebaseapi.app.util.exception.AppException;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -30,7 +29,7 @@ public class CreateListCommandExecutor implements CommandExecutor<CreateListComm
             listRepository.save(entity);
         } catch (DataIntegrityViolationException e){
             log.info("User tried to create new list with name of existing list.");
-            throw new AppException(String.format("List with name %s already exists in your lists, give unique name.", command.getName()));
+            throw new IllegalArgumentException(String.format("List with name %s already exists in your lists, give unique name.", command.getName()));
         }
         return new CommandVoidResult();
     }
